@@ -1,0 +1,9 @@
+{
+  "verbose": "true",
+  "colours": "true",
+  "execMap": {
+    "ts": "node --inspect=0.0.0.0:9229 --require ts-node/register src/start.ts"
+  },
+  "ignore": ["node_modules", "logs/**", "*.log"],
+  "watch": ["src/**"]
+}

@@ -1,0 +1,16 @@
+FROM node:alpine
+
+WORKDIR /usr/app
+COPY package.json .
+RUN npm install && npm cache clean --force
+
+WORKDIR /usr/app/dev
+COPY ./base.json .
+COPY ./nodemon.json .
+COPY ./tsconfig.json .
+COPY ./jest.config.js .
+COPY ./src .
+COPY ./.env .
+
+EXPOSE ${NODE_DOCKER_PORT}
+CMD ["npm", "run", "dev"]
