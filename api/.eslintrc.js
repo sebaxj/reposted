@@ -20,9 +20,15 @@ module.exports = {
   },
   rules: {
     // 0 = 'off', 1 = 'warn', 2 = 'error'
-    'no-console': 1,
-    'no-unreachable': 2,
-    'no-unreachable-loop': 2,
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+    'no-console': 'warn',
+    'no-unreachable': 'error',
+    'no-unreachable-loop': 'error',
+    'no-use-before-define': 'warn',
+    'max-len': ['error', { code: 100, tabWidth: 2 }],
+    'comma-dangle': 'off',
+    'no-underscore-dangle': 'off',
   },
   env: {
     browser: true,
