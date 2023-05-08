@@ -1,31 +1,30 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import jwt_decode from 'jwt-decode';
 
 // Define a type for the slice state
 export interface AuthenticationState {
-  isAuthenticated: boolean;
+  jwt?: JWT;
 }
 
 // Define the initial state using that type
 const initialState: AuthenticationState = {
-  isAuthenticated: false,
+  jwt: undefined,
 };
 
 export const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: {
-    login: (state) => {
+    // Use the PayloadAction type to declare the contents of `action.payload`
+    login: (state, action: PayloadAction<string>) => {
+      const jwt: JWT = jwt_decode(action.payload);
       // eslint-disable-next-line no-param-reassign
-      state.isAuthenticated = true;
+      state.jwt = { ...jwt };
     },
     logout: (state) => {
       // eslint-disable-next-line no-param-reassign
-      state.isAuthenticated = false;
+      state.jwt = undefined;
     },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    // signUp: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload
-    // }
   },
 });
 
