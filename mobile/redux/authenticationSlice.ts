@@ -16,7 +16,7 @@ export const authenticationSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    login: (state, action: PayloadAction<string>) => {
+    setCredentials: (state, action: PayloadAction<string>) => {
       const jwt: JWT = jwt_decode(action.payload);
       // eslint-disable-next-line no-param-reassign
       state.jwt = { ...jwt };
@@ -29,7 +29,7 @@ export const authenticationSlice = createSlice({
 });
 
 // export actions for each case reducer function
-export const { login, logout } = authenticationSlice.actions;
+export const { setCredentials, logout } = authenticationSlice.actions;
 
 // export reducer
 export default authenticationSlice.reducer;

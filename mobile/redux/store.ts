@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authenticationReducer from './authenticationSlice';
 import feedReducer from './feedSlice';
+import { api } from './api';
 
 const store = configureStore({
   reducer: {
+    [api.reducerPath]: api.reducer,
     authentication: authenticationReducer,
     feed: feedReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 });
 
 export default store;
