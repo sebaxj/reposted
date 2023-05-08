@@ -16,7 +16,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Docker Image 📦
-        run: docker-compose build --no-cache --force-rm
+        run: |-
+          cd api
+          docker-compose build --no-cache --force-rm
 
       - name: Test Docker Image 📦
-        run: docker-compose up
+        run: |-
+          cd api
+          docker-compose up
