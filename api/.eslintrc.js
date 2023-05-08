@@ -26,7 +26,7 @@ module.exports = {
     'no-unreachable': 'error',
     'no-unreachable-loop': 'error',
     'no-use-before-define': 'warn',
-    'max-len': ['error', { code: 100, tabWidth: 2 }],
+    'max-len': ['error', { code: 120, tabWidth: 2 }],
     'comma-dangle': 'off',
     'no-underscore-dangle': 'off',
   },

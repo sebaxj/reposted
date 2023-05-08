@@ -11,6 +11,7 @@ import morganMiddleware from './middleware/morgan.middleware';
 import { Logger } from './utils/logger';
 import { MONGO_CONN_TIMEOUT } from './utils/constants';
 import indexRoutes from './routes/index.routes';
+import userRoutes from './routes/user.routes';
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ app.use(cors(corsOptions));
 
 // send fetch requests to the router
 app.use('/', indexRoutes);
+app.use('/user', userRoutes);
 
 // create mongoose connection to MongoDB
 Logger.info(

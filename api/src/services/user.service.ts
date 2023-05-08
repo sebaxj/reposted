@@ -1,28 +1,50 @@
 /**
  * Service for interacting with the user API
  */
+import appleSignin, { AppleIdTokenType } from 'apple-signin-auth';
+import UserMapper from '../mappers/user.mapper';
+import UserRepository from '../repository/user.repository';
+import { createLog, Logger } from '../utils/logger';
 
-import { UserRepository } from '../repository/user.repository';
+export default class UserService {
+  userRepository: UserRepository;
 
-export class UserService {
-  userRepository: UserRepository = new UserRepository();
-
-  constructor() {}
+  constructor() {
+    this.userRepository = new UserRepository();
+  }
 
   /**
    * Method to create a new user
-   * @param {CreateNewUserDomain} createNewUserDomain - the domain for a user API request
-   * @returns {Promise<UserEntity>} - the created user
+   * @param {string} idToken - the Apple ID token
+   * @param {string | null} firstName - the user's first name
+   * @param {string | null} lastName - the user's last name
+   * @returns {Promise<UserTypes.UserResponseDomain & {created: boolean}>} - the created user domain
    */
-  public createUser(createNewUserDomain: UserTypes.CreateNewUserDomain): Promise<UserTypes.UserResponseDomain> {
+  public authenticateUser(
+    idToken: string,
+    firstName: string | null,
+    lastName: string | null,
+  ): Promise<UserTypes.UserResponseDomain & { created: boolean }> {
     return new Promise((resolve, reject) => {
-      this.userRepository
-        .createUser(createNewUserDomain)
-        .then((createdUser: UserTypes.UserResponseDomain) => {
-          return resolve(createdUser);
+      appleSignin
+        .verifyIdToken(idToken, { audience: 'com.reposted.app', ignoreExpiration: true, scope: 'name email' })
+        .then((decodedIdToken: AppleIdTokenType) => {
+          if (decodedIdToken.email_verified !== 'true' || !decodedIdToken.email_verified) {
+            Logger.error(
+              createLog('User email not verified', `Email: ${decodedIdToken.email} Token: ${idToken}`, null),
+            );
+            reject('User email not verified');
+          }
+
+          // else, create user if they don't exist, return user document
+          this.userRepository
+            .authenticateUser(UserMapper.userRequestDtoToDomain({ email: decodedIdToken.email, firstName, lastName }))
+            .then((user: UserTypes.UserResponseDomain & { created: boolean }) => {
+              resolve(user);
+            });
         })
-        .catch((err: string) => {
-          return reject(err);
+        .catch((err: unknown) => {
+          reject(err);
         });
     });
   }
