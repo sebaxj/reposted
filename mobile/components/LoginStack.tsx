@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { moderateScale, verticalScale } from '../utils/scale.utility';
 import { useAppDispatch } from '../redux/hooks';
 import { login } from '../redux/authenticationSlice';
