@@ -20,6 +20,13 @@ jobs:
           cd api
           docker-compose build --no-cache --force-rm
 
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code 🛎
+        uses: actions/checkout@v3
+
       - name: Test Docker Image 📦
         run: |-
           cd api
