@@ -1,34 +1,43 @@
-import { HydratedDocument, MongooseError } from 'mongoose';
+import { MongooseError, ModifyResult, Document } from 'mongoose';
 import { IUser, User } from '../models/user.model';
 import { createLog, Logger } from '../utils/logger';
 import { ErrorCode } from '../utils/constants';
-import { UserMapper } from '../mappers/user.mapper';
+import UserMapper from '../mappers/user.mapper';
 
-export class UserRepository {
-  userMapper: UserMapper = new UserMapper();
-
-  constructor() {}
-
+export default class UserRepository {
   /**
-   * Method to create a new user
-   * @param {CreateNewUserDomain} createNewUserDomain - the user to be created
-   * @returns {Promise<UserResponseDomain>} promise which resolves to the user object if successful
+   * Method to authenticate a new user
+   * @param {UserTypes.UserRequestDomain} userRequestDomain - the user to be authenticated
+   * @returns {Promise<UserResponseDomain & {created: boolean}>} promise which resolves to the user object if successful
    */
-  public createUser(createNewUserDomain: UserTypes.CreateNewUserDomain): Promise<UserTypes.UserResponseDomain> {
+  public authenticateUser(
+    userRequestDomain: UserTypes.UserRequestDomain,
+  ): Promise<UserTypes.UserResponseDomain & { created: boolean }> {
     return new Promise((resolve, reject) => {
-      // create new user object
-      const newUser: HydratedDocument<IUser> = new User(createNewUserDomain);
-
-      // save new user document to User collection
-      newUser
-        .save()
-        .then((savedUser: IUser) => {
-          // map the saved user back to the domain
-          return resolve(this.userMapper.userEntityToDomain(this.userMapper.IUserToEntity(savedUser)));
-        })
+      // find and upsert user
+      User.findOneAndUpdate(userRequestDomain, {}, { upsert: true, new: true, runValidators: true, rawResult: true })
+        .then(
+          (
+            user: ModifyResult<
+              Document<unknown, any, IUser> &
+                Omit<
+                  IUser &
+                    Required<{
+                      _id: string;
+                    }>,
+                  never
+                >
+            >,
+          ) => {
+            return resolve({
+              ...UserMapper.IUserToUserResponseDomain(user.value as IUser),
+              created: !user.lastErrorObject?.updatedExisting,
+            });
+          },
+        )
         .catch((err: MongooseError) => {
           // error saving the user
-          Logger.error(createLog(ErrorCode.UNABLE_TO_CREATE_USER, `Username: ${newUser.username}.`, err.message));
+          Logger.error(createLog(ErrorCode.UNABLE_TO_AUTHENTICATE, `Email: ${userRequestDomain.email}.`, err.message));
           return reject(err.message);
         });
     });

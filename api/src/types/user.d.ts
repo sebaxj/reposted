@@ -3,40 +3,34 @@
  */
 namespace UserTypes {
   /**
-   * CreateNewUserDto interface
-   */
-  interface CreateNewUserDto {
-    username: string;
-    password: string;
-  }
-
-  /**
-   * CreateNewUserDomain interface
-   */
-  interface CreateNewUserDomain extends CreateNewUserDto {}
-
-  /**
-   * UserResponseDto interface
-   */
-  interface UserResponseDto {
-    username: string;
-  }
-
-  /**
    * UserResponseDomain interface
    */
-  interface UserResponseDomain extends UserResponseDto {
+  interface UserResponseDomain {
     _id: string;
-    password: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    createdAt: Date;
   }
 
   /**
-   * UserEntity interface
+   * CreateUserDomain interface
    */
-  interface UserEntity extends UserResponseDomain {
-    _id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
+  interface UserRequestDomain {
+    username?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+  }
+
+  /**
+   * UserRequestDto interface {
+   */
+  interface UserRequestDto {
+    username?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    email?: string | null;
   }
 }

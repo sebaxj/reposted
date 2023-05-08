@@ -1,32 +1,17 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
-import { moderateScale, verticalScale } from '../utils/scale.utility';
-import { useAppDispatch } from '../redux/hooks';
-import { login } from '../redux/authenticationSlice';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Authentication from './Authentication';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: 'blue',
-    padding: verticalScale(8),
-    borderRadius: moderateScale(8),
-    margin: verticalScale(8),
-  },
-});
+const LoginStackNav = createNativeStackNavigator<NavigationTypes.LoginStackParamList>();
 
 export default function LoginStack(): JSX.Element {
-  // import hooks for authentication reducer
-  const dispatch = useAppDispatch();
-
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => dispatch(login())} style={styles.button}>
-        <Text>Login</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+    <LoginStackNav.Navigator>
+      <LoginStackNav.Screen
+        name="Authentication"
+        component={Authentication}
+        options={{ headerShown: false }}
+      />
+    </LoginStackNav.Navigator>
   );
 }
