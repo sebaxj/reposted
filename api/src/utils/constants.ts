@@ -38,6 +38,8 @@ export enum ErrorCode {
   JWT_DECODE_ERROR = 'JWT decode error.',
   UNABLE_TO_AUTHENTICATE = 'Unable to authenticate user.',
   UNABLE_TO_CREATE_USER = 'Unable to create user.',
+  USER_NOT_FOUND = 'User not found.',
+  MONGOOSE_ERROR = 'Mongoose error.',
 }
 
 /**

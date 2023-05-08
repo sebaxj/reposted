@@ -37,4 +37,37 @@ export default class UserMapper {
       createdAt: userDocument.createdAt,
     };
   }
+
+  /**
+   * Map UserResponseDomain to UserResponseRestrictedDto
+   * @param {UserTypes.UserResponseDomain} userResponseDomain
+   * @returns {UserTypes.UserResponseRestrictedDto} user restricted DTO object
+   */
+  static userResponseDomainToRestrictedDto(
+    userResponseDomain: UserTypes.UserResponseDomain,
+  ): UserTypes.UserResponseRestrictedDto {
+    return {
+      _id: userResponseDomain._id,
+      username: userResponseDomain.username,
+      firstName: userResponseDomain.firstName,
+      lastName: userResponseDomain.lastName,
+      createdAt: userResponseDomain.createdAt,
+    };
+  }
+
+  /**
+   * Map UserResponseDomain to UserResponseFullDto
+   * @param {UserTypes.UserResponseDomain} userResponseDomain
+   * @returns {UserTypes.UserResponseFullDto} user restricted DTO object
+   */
+  static userResponseDomainToFullDto(userResponseDomain: UserTypes.UserResponseDomain): UserTypes.UserResponseFullDto {
+    return {
+      _id: userResponseDomain._id,
+      username: userResponseDomain.username,
+      email: userResponseDomain.email,
+      firstName: userResponseDomain.firstName,
+      lastName: userResponseDomain.lastName,
+      createdAt: userResponseDomain.createdAt,
+    };
+  }
 }

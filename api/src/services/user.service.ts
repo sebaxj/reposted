@@ -33,18 +33,37 @@ export default class UserService {
             Logger.error(
               createLog('User email not verified', `Email: ${decodedIdToken.email} Token: ${idToken}`, null),
             );
-            reject('User email not verified');
+            return reject('User email not verified');
           }
 
           // else, create user if they don't exist, return user document
           this.userRepository
             .authenticateUser(UserMapper.userRequestDtoToDomain({ email: decodedIdToken.email, firstName, lastName }))
             .then((user: UserTypes.UserResponseDomain & { created: boolean }) => {
-              resolve(user);
+              return resolve(user);
             });
         })
         .catch((err: unknown) => {
-          reject(err);
+          return reject(err);
+        });
+    });
+  }
+
+  /**
+   * Method to get a ser by Mongo ID
+   * @param {string} getUserId - the Mongo ID of the user to retrieve
+   * @param {string} requestingUserId - the Mongo ID of the user making the request
+   * @returns {Promise<UserTypes.UserResponseDomain>} promise which resolves to the user domain
+   */
+  public getUser(getUserId: string, requestingUserId: string): Promise<UserTypes.UserResponseDomain> {
+    return new Promise((resolve, reject) => {
+      this.userRepository
+        .getUserById(getUserId, requestingUserId)
+        .then((user: UserTypes.UserResponseDomain) => {
+          return resolve(user);
+        })
+        .catch((err: unknown) => {
+          return reject(err);
         });
     });
   }

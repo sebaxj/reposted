@@ -33,4 +33,14 @@ namespace UserTypes {
     lastName?: string | null;
     email?: string | null;
   }
+
+  /**
+   * UserResponseRestrictedDto interface
+   */
+  interface UserResponseRestrictedDto extends Omit<UserResponseDomain, 'email'> {}
+
+  /**
+   * UserResponseRestrictedDto interface
+   */
+  interface UserResponseFullDto extends UserResponseDomain {}
 }
