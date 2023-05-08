@@ -9,3 +9,13 @@ interface ApiResponse {
   error: any;
   meta: any;
 }
+
+interface JWT {
+  _id: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
