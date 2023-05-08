@@ -1,0 +1,22 @@
+name: docker-api-build.yml
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "api/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code 🛎
+        uses: actions/checkout@v3
+
+      - name: Build Docker Image 📦
+        run: docker-compose build --no-cache --force-rm
+
+      - name: Test Docker Image 📦
+        run: docker-compose up
