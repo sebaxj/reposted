@@ -30,4 +30,4 @@ jobs:
       - name: Test Docker Image 📦
         run: |-
           cd api
-          docker-compose up
+          docker-compose up -d
