@@ -1,7 +1,15 @@
+/**
+ * The Prettier config file
+ */
 module.exports = {
-  arrowParens: 'avoid',
-  bracketSameLine: true,
-  bracketSpacing: false,
-  singleQuote: true,
+  semi: true,
   trailingComma: 'all',
+  jsxSingleQuote: false,
+  singleQuote: true,
+  printWidth: 100,
+  tabWidth: 2,
+  bracketSpacing: true,
+  bracketSameLine: false,
+  useTabs: false,
+  arrowParens: 'always',
 };

@@ -1,14 +1,12 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { useAppSelector } from '../redux/hooks';
 import AppStack from './AppStack';
 import LoginStack from './LoginStack';
 
 export default function Router(): JSX.Element {
-  const isLoggedIn: boolean = true;
+  // get authentication state from redux store
+  const isLoggedIn = useAppSelector((state) => state.authentication.isAuthenticated);
 
-  return (
-    <NavigationContainer>
-      {isLoggedIn ? <AppStack /> : <LoginStack />}
-    </NavigationContainer>
-  );
+  return <NavigationContainer>{isLoggedIn ? <AppStack /> : <LoginStack />}</NavigationContainer>;
 }
