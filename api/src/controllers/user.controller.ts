@@ -14,7 +14,7 @@ import UserMapper from '../mappers/user.mapper';
 const userService: UserService = new UserService();
 
 //--------
-// Autnehticate a User
+// Authenticate a User
 //--------
 export const authenticateUser = async (req: Request, res: Response) => {
   try {
@@ -37,7 +37,7 @@ export const authenticateUser = async (req: Request, res: Response) => {
     return res.status(HttpStatus.OK).json(response(userDomain, null, null));
   } catch (err: unknown) {
     // log error
-    Logger.error(createLog("Can't authenticate user", `${err}`, req));
+    Logger.error(createLog("Can't authenticate user", `${err}`, 'user.controller'));
     return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(response(null, `${err}`, null));
   }
 };
@@ -73,7 +73,9 @@ export const getUser = async (req: Request, res: Response) => {
       );
   } catch (err: unknown) {
     // log error
-    Logger.error(createLog(`Can't get user ${req.params.id} requested by ID ${req.body.jwt._id}`, `${err}`, 'getUser'));
+    Logger.error(
+      createLog(`Can't get user ${req.params.id} requested by ID ${req.body.jwt._id}`, `${err}`, 'user.controller'),
+    );
     return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(response(null, `${err}`, null));
   }
 };

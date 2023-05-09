@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import TwitterPreview from 'react-native-twitter-preview';
 import { moderateScale, verticalScale } from '../utils/scale.utility';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { toggleFeedView } from '../redux/feedSlice';
@@ -7,8 +8,8 @@ import { toggleFeedView } from '../redux/feedSlice';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F8F8FF',
   },
   content: {
     flexDirection: 'row',
@@ -19,21 +20,41 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(8),
     margin: verticalScale(8),
   },
+  tweet: {
+    width: 300,
+    height: 580,
+  },
 });
 
 function Global(): JSX.Element {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text>Global</Text>
-    </SafeAreaView>
+    </View>
   );
 }
 
 function Following(): JSX.Element {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={{ width: '100%' }}>
       <Text>Following</Text>
-    </SafeAreaView>
+      <TwitterPreview
+        url="https://twitter.com/Tesla/status/1655673425736638473"
+        backgroundColor="#F8F8FF"
+      />
+      <TwitterPreview
+        url="https://twitter.com/RoyalFamily/status/1655603604957306882?s=20"
+        backgroundColor="#F8F8FF"
+      />
+      <TwitterPreview
+        url="https://twitter.com/megynkelly/status/1655329512912044032?s=20"
+        backgroundColor="#F8F8FF"
+      />
+      <TwitterPreview
+        url="https://twitter.com/megynkelly/status/1655329512912044032?s=20"
+        backgroundColor="#F8F8FF"
+      />
+    </ScrollView>
   );
 }
 
@@ -51,7 +72,7 @@ export default function Home(): JSX.Element {
           <Text>Global</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => dispatch(toggleFeedView(false))} style={styles.button}>
-          <Text>Feed</Text>
+          <Text>Following</Text>
         </TouchableOpacity>
       </View>
       {globalFeedView ? <Global /> : <Following />}
