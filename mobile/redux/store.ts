@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authenticationReducer from './authenticationSlice';
 import feedReducer from './feedSlice';
-import { api } from './api';
+import { api, instagramApi, instagramGraphApi } from './api';
 
 const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
+    [instagramApi.reducerPath]: instagramApi.reducer,
+    [instagramGraphApi.reducerPath]: instagramGraphApi.reducer,
     authentication: authenticationReducer,
     feed: feedReducer,
   },
