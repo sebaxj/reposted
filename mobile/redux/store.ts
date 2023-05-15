@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authenticationReducer from './authenticationSlice';
 import feedReducer from './feedSlice';
-import { api, instagramApi, instagramGraphApi } from './api';
+import { api, instagramApi } from './api';
 
 const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     [instagramApi.reducerPath]: instagramApi.reducer,
-    [instagramGraphApi.reducerPath]: instagramGraphApi.reducer,
     authentication: authenticationReducer,
     feed: feedReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware, instagramApi.middleware),
 });
 
 export default store;

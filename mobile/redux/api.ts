@@ -27,8 +27,8 @@ export const api = createApi({
           const jwt: string | null = meta?.response.headers.get('set-cookie');
           dispatch(setCredentials(jwt as string));
         } catch (err: unknown) {
-          // TODO: Handle error
           dispatch(logout());
+          throw new Error('Error logging in');
         }
       },
     }),
@@ -39,57 +39,17 @@ export const api = createApi({
 export const instagramApi = createApi({
   reducerPath: 'instagramApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.instagram.com',
+    baseUrl: 'https://www.instagram.com/api/v1/oembed',
   }),
   endpoints: (builder) => ({
-    getUserAccessToken: builder.mutation<object, string>({
-      query: (code) => ({
-        url: '/oauth/access_token',
-        method: 'POST',
-        body: { client_id: '', client_secret: '', grant_type: '', redirect_uri: '', code },
-      }),
-      async onQueryStarted(code, { dispatch, queryFulfilled }) {
-        try {
-          const { meta } = await queryFulfilled;
-          if (!meta?.response) throw new Error('No JWT found');
-          const jwt: string | null = meta?.response.headers.get('set-cookie');
-          dispatch(setCredentials(jwt as string));
-        } catch (err: unknown) {
-          // TODO: Handle error
-          dispatch(logout());
-        }
-      },
-    }),
-  }),
-});
-
-// Instagram Graph API
-export const instagramGraphApi = createApi({
-  reducerPath: 'instagramGraphApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://graph.instagram.com',
-  }),
-  endpoints: (builder) => ({
-    getLongUserAccessToken: builder.mutation<object, string>({
-      query: (accessToken) => ({
-        url: `/access_token?grant_type=ig_exchange_token&client_secret=c49ed426bcd9c7d2465d14b5e223792d&access_token=${accessToken}`,
+    getPostEmbedCode: builder.query<{ html: string }, string>({
+      query: (link) => ({
+        url: `/?url=${encodeURIComponent(link)}&hidecaption=0`,
         method: 'GET',
       }),
-      async onQueryStarted(accessToken, { dispatch, queryFulfilled }) {
-        try {
-          const { meta } = await queryFulfilled;
-          if (!meta?.response) throw new Error('No JWT found');
-          const jwt: string | null = meta?.response.headers.get('set-cookie');
-          dispatch(setCredentials(jwt as string));
-        } catch (err: unknown) {
-          // TODO: Handle error
-          dispatch(logout());
-        }
-      },
     }),
   }),
 });
 
 export const { useLoginMutation } = api;
-export const { useGetUserAccessTokenMutation } = instagramApi;
-export const { useGetLongUserAccessTokenMutation } = instagramGraphApi;
+export const { useGetPostEmbedCodeQuery } = instagramApi;
