@@ -4,6 +4,7 @@ import TwitterPreview from 'react-native-twitter-preview';
 import { moderateScale, verticalScale } from '../utils/scale.utility';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { toggleFeedView } from '../redux/feedSlice';
+import InstagramEmbed from './InstagramEmbed';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,9 +29,10 @@ const styles = StyleSheet.create({
 
 function Global(): JSX.Element {
   return (
-    <View style={styles.container}>
+    <ScrollView style={{ width: '100%' }}>
       <Text>Global</Text>
-    </View>
+      <InstagramEmbed url="https://www.instagram.com/p/CsOJmhNPsx4/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==" />
+    </ScrollView>
   );
 }
 
@@ -59,7 +61,7 @@ function Following(): JSX.Element {
 }
 
 export default function Home(): JSX.Element {
-  // get feed view from redux store
+  // get feed view and instagram token from redux store
   const globalFeedView: boolean = useAppSelector((state) => state.feed.global);
 
   // get dispatcher
