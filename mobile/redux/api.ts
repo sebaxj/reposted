@@ -42,9 +42,25 @@ export const instagramApi = createApi({
     baseUrl: 'https://www.instagram.com/api/v1/oembed',
   }),
   endpoints: (builder) => ({
-    getPostEmbedCode: builder.query<{ html: string }, string>({
+    getInstagramPostEmbedCode: builder.query<{ html: string }, string>({
       query: (link) => ({
-        url: `/?url=${encodeURIComponent(link)}&hidecaption=0`,
+        url: `?url=${encodeURIComponent(link)}&hidecaption=0`,
+        method: 'GET',
+      }),
+    }),
+  }),
+});
+
+// TikTok API
+export const tiktokApi = createApi({
+  reducerPath: 'tiktokApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://www.tiktok.com/oembed',
+  }),
+  endpoints: (builder) => ({
+    getTiktokPostEmbedCode: builder.query<{ html: string }, string>({
+      query: (link) => ({
+        url: `?url=${encodeURIComponent(link)}`,
         method: 'GET',
       }),
     }),
@@ -52,4 +68,5 @@ export const instagramApi = createApi({
 });
 
 export const { useLoginMutation } = api;
-export const { useGetPostEmbedCodeQuery } = instagramApi;
+export const { useGetInstagramPostEmbedCodeQuery } = instagramApi;
+export const { useGetTiktokPostEmbedCodeQuery } = tiktokApi;

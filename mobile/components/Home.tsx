@@ -5,6 +5,7 @@ import { moderateScale, verticalScale } from '../utils/scale.utility';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { toggleFeedView } from '../redux/feedSlice';
 import InstagramEmbed from './InstagramEmbed';
+import TiktokEmbed from './TikTokEmbed';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +33,9 @@ function Global(): JSX.Element {
     <ScrollView style={{ width: '100%' }}>
       <Text>Global</Text>
       <InstagramEmbed url="https://www.instagram.com/p/CsOJmhNPsx4/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==" />
+      <TiktokEmbed url="https://www.tiktok.com/@scout2015/video/6718335390845095173" />
+      <InstagramEmbed url="https://www.instagram.com/p/CsOJmhNPsx4/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==" />
+      <TiktokEmbed url="https://www.tiktok.com/@goodthing828/video/7232724820650167579" />
     </ScrollView>
   );
 }
