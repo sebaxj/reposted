@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, Linking, StyleSheet, Text } from 'react-native';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
+import { View, StyleSheet, Text } from 'react-native';
+import WebView from 'react-native-webview';
 import { useGetTiktokPostEmbedCodeQuery } from '../redux/api';
 import Loading from './Loading';
 import { verticalScale } from '../utils/scale.utility';
@@ -17,23 +17,8 @@ const styles = StyleSheet.create({
 });
 
 export default function TiktokEmbed({ url }: { url: string }): JSX.Element {
-  // manage height for WebView component
-  const [webviewHeight, setWebviewHeight] = React.useState<number>(250);
-
   // get embed code from instagram url
   const { data, error, isLoading } = useGetTiktokPostEmbedCodeQuery(url);
-
-  // get content height from WebView
-  const onWebViewMessage = (event: WebViewMessageEvent) => {
-    setWebviewHeight(Number(event.nativeEvent.data));
-  };
-
-  // inject javascript code to get content height from WebView
-  const injectedJavaScript = `
-      setTimeout(() => {
-        window.ReactNativeWebView.postMessage(
-          Math.min(document.body.offsetHeight, document.body.scrollHeight)
-        );}, 1800)`;
 
   const embedCode = data?.html;
 
@@ -58,8 +43,6 @@ export default function TiktokEmbed({ url }: { url: string }): JSX.Element {
       ) : (
         <View style={styles.webViewContainer}>
           <WebView
-            onMessage={onWebViewMessage}
-            injectedJavaScript={injectedJavaScript}
             source={{ html }}
             scrollEnabled={false}
             allowsFullscreenVideo={false}
