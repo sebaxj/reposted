@@ -4,7 +4,6 @@ WORKDIR /usr/app
 COPY package.json .
 RUN npm install && npm cache clean --force
 
-WORKDIR /usr/app/dev
 COPY ./base.json .
 COPY ./nodemon.json .
 COPY ./tsconfig.json .
