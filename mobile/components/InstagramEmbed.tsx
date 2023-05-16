@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Linking, StyleSheet, Text } from 'react-native';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
-import { useGetPostEmbedCodeQuery } from '../redux/api';
+import { useGetInstagramPostEmbedCodeQuery } from '../redux/api';
 import Loading from './Loading';
 
 const styles = StyleSheet.create({
@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function EmbeddedInstagram({ url }: { url: string }): JSX.Element {
+export default function InstagramEmbed({ url }: { url: string }): JSX.Element {
   // manage height for WebView component
   const [webviewHeight, setWebviewHeight] = React.useState<number>(250);
 
   // get embed code from instagram url
-  const { data, error, isLoading } = useGetPostEmbedCodeQuery(url);
+  const { data, error, isLoading } = useGetInstagramPostEmbedCodeQuery(url);
 
   // get content height from WebView
   const onWebViewMessage = (event: WebViewMessageEvent) => {

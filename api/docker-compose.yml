@@ -1,10 +1,12 @@
-version: "3.8"
+version: '3.8'
 
 services:
   mongodb:
     image: mongo
     restart: unless-stopped
     env_file: ./.env
+    logging:
+      driver: 'none'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
@@ -17,19 +19,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-      # for production
+    # for production
     # build:
     #   context: .
     #   dockerfile: Dockerfile
-    restart: always
+    restart: unless-stopped
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     stdin_open: true
     tty: true
     volumes:
-      - ./:/usr/app/dev
-      - exclude:/usr/app/dev/node_modules/
-
-volumes:
-  exclude:
+      - ./:/usr/app
+      - /usr/app/node_modules/
