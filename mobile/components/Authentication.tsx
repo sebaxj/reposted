@@ -82,8 +82,7 @@ export default function Authentication(): JSX.Element {
     <SafeAreaView style={styles.container}>
       {error && (
         <Text>
-          {error.error ??
-            'Oops! This is embarassing. Your login request has failed. Please try again later.'}
+          {'Oops! This is embarassing. Your login request has failed. Please try again later.'}
         </Text>
       )}
       <AppleButton

@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
 export default function TiktokEmbed({ url }: { url: string }): JSX.Element {
   // get embed code from instagram url
   const { data, error, isLoading } = useGetTiktokPostEmbedCodeQuery(url);
-
   const embedCode = data?.html;
 
   // WebView HTML code
@@ -37,7 +36,7 @@ export default function TiktokEmbed({ url }: { url: string }): JSX.Element {
   if (isLoading) return <Loading />;
 
   return (
-    <View style={{ height: verticalScale(740) }}>
+    <View style={{ height: verticalScale(940) }}>
       {error ? (
         <Text>{error as string}</Text>
       ) : (
