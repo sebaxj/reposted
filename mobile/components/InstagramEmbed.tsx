@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   instagramBox: {
     width: '100%',
-  }
+  },
 });
 
 export default function InstagramEmbed({ url }: { url: string }): JSX.Element {
@@ -57,7 +57,7 @@ export default function InstagramEmbed({ url }: { url: string }): JSX.Element {
   if (isLoading) return <Loading />;
 
   return (
-    <View style={[styles.instagramBox, { height: webviewHeight + 20 }]}>
+    <View style={{ ...styles.instagramBox, height: webviewHeight + 20 }}>
       {error ? (
         <Text>{error as string}</Text>
       ) : (

@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, Image } from 'react-native';
 import { AppleButton, appleAuth } from '@invertase/react-native-apple-authentication';
-import { horizontalScale, verticalScale } from '../utils/scale.utility';
+import { horizontalScale, moderateScale, scaleFont, verticalScale } from '../utils/scale.utility';
 import { useLoginMutation } from '../redux/api';
 import Loading from './Loading';
 
@@ -10,10 +10,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: verticalScale(16),
   },
   button: {
     height: verticalScale(64),
     width: horizontalScale(192),
+  },
+  logo: {
+    height: horizontalScale(164),
+    width: horizontalScale(164),
+  },
+  title: {
+    fontSize: scaleFont(34),
   },
 });
 
@@ -80,11 +88,9 @@ export default function Authentication(): JSX.Element {
 
   return (
     <SafeAreaView style={styles.container}>
-      {error && (
-        <Text>
-          {'Oops! This is embarassing. Your login request has failed. Please try again later.'}
-        </Text>
-      )}
+      <Image source={require('../assets/reposted.png')} style={styles.logo} />
+      <Text style={styles.title}>Reposted</Text>
+      {error && <Text>{`Error: ${error.toString()}`}</Text>}
       <AppleButton
         buttonStyle={AppleButton.Style.BLACK}
         buttonType={AppleButton.Type.SIGN_IN}
