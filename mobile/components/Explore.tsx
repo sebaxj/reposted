@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   header: {
     gap: horizontalScale(8),
-  }
+  },
 });
 
 const profiles = [
@@ -74,16 +74,15 @@ export default function Explore(): JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-      <Text style={styles.title}>Explore</Text>
-      <SearchBar
-        placeholder="Search for a user"
-        value={value}
-        onValueChange={setValue}
-        onClear={() => setValue('')}
-        onCancel={() => setValue('')}
-      />
-      <Text style={styles.subtitle}>Recently Searched:</Text>
-
+        <Text style={styles.title}>Explore</Text>
+        <SearchBar
+          placeholder="Search for a user"
+          value={value}
+          onValueChange={setValue}
+          onClear={() => setValue('')}
+          onCancel={() => setValue('')}
+        />
+        <Text style={styles.subtitle}>Recently Searched:</Text>
       </View>
       <FlatList
         style={styles.followersList}

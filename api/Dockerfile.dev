@@ -8,7 +8,7 @@ COPY ./base.json .
 COPY ./nodemon.json .
 COPY ./tsconfig.json .
 COPY ./jest.config.js .
-COPY ./src .
+COPY ./src ./src
 COPY ./.env .
 
 EXPOSE ${NODE_DOCKER_PORT}
