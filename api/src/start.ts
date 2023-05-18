@@ -3,5 +3,5 @@ import { Logger } from './utils/logger';
 
 const PORT = (process.env.NODE_DOCKER_PORT as unknown as number) || 8080;
 app.listen(PORT, () => {
-  Logger.info(`Server is running on port ${'6868' ?? PORT}.`);
+  Logger.info(`Server is running on port ${process.env.NODE_LOCAL_PORT ?? 8080}.`);
 });

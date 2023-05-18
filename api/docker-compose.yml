@@ -7,9 +7,6 @@ services:
     env_file: ./.env
     logging:
       driver: 'none'
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
     ports:
       - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
 

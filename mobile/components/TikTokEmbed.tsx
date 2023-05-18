@@ -36,7 +36,7 @@ export default function TiktokEmbed({ url }: { url: string }): JSX.Element {
   if (isLoading) return <Loading />;
 
   return (
-    <View style={{ height: verticalScale(940) }}>
+    <View style={{ height: verticalScale(680) }}>
       {error ? (
         <Text>{error as string}</Text>
       ) : (

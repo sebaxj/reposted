@@ -4,7 +4,7 @@ WORKDIR /usr/app
 COPY package.json .
 RUN npm install && npm cache clean --force
 
-COPY ./.env .
+COPY ./src .
 
 EXPOSE ${NODE_DOCKER_PORT}
-CMD ["npm", "run", "start:local"]
+CMD ["npm", "run", "start"]
