@@ -2,6 +2,11 @@ namespace NavigationTypes {
   type LoginStackParamList = {
     Authentication: undefined;
   };
+
+  type HomeStackParamList = {
+    Home: undefined;
+    CreatePost: undefined;
+  };
 }
 
 interface ApiResponse {

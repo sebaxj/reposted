@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { logout, setCredentials } from './authenticationSlice';
+import type { RootState } from './store';
 
 export interface LoginRequest {
   idToken: string;
@@ -7,11 +8,28 @@ export interface LoginRequest {
   lastName?: string | null;
 }
 
+export interface CreatePostRequest {
+  url: string;
+  source: 'twitter' | 'instagram' | 'tiktok';
+  privacy: 'public' | 'private';
+}
+
 // Reposted API
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:6868',
+    prepareHeaders: (
+      headers: Headers,
+      { getState, endpoint }: { getState: () => unknown; endpoint: string },
+    ) => {
+      if (endpoint === 'login') return headers;
+      const { jwtToken } = (getState() as RootState).authentication;
+      if (jwtToken) {
+        headers.set('Cookie', jwtToken);
+      }
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     login: builder.mutation<ApiResponse, LoginRequest>({
@@ -31,6 +49,13 @@ export const api = createApi({
           throw new Error('Error logging in');
         }
       },
+    }),
+    createPost: builder.mutation<ApiResponse, CreatePostRequest>({
+      query: (postBody) => ({
+        url: '/post/create',
+        method: 'POST',
+        body: { ...postBody },
+      }),
     }),
   }),
 });
@@ -67,6 +92,6 @@ export const tiktokApi = createApi({
   }),
 });
 
-export const { useLoginMutation } = api;
+export const { useLoginMutation, useCreatePostMutation } = api;
 export const { useGetInstagramPostEmbedCodeQuery } = instagramApi;
 export const { useGetTiktokPostEmbedCodeQuery } = tiktokApi;

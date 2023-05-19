@@ -12,6 +12,7 @@ export interface IPost {
   userId: Schema.Types.ObjectId | string;
   url: string;
   source: 'twitter' | 'instagram';
+  privacy: 'public' | 'private';
   createdAt: Date;
   updatedAt: Date;
   __v: number;
@@ -26,6 +27,7 @@ const postSchema: Schema<IPost> = new Schema<IPost>(
     },
     url: { type: String, required: true },
     source: { type: String, required: true, enum: ['twitter', 'instagram'] },
+    privacy: { type: String, required: true, enum: ['public', 'private'] },
   },
   { timestamps: true },
 );
