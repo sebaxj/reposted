@@ -20,6 +20,7 @@ module.exports = {
     // 0 = 'off', 1 = 'warn', 2 = 'error'
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+    'react-native/no-inline-styles': 'off',
     'no-console': 'warn',
     'no-unreachable': 'error',
     'no-unreachable-loop': 'error',

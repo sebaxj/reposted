@@ -24,6 +24,7 @@ export default class PostMapper {
       userId: postDocument.userId.toString(),
       url: postDocument.url,
       source: postDocument.source,
+      privacy: postDocument.privacy,
       createdAt: postDocument.createdAt,
     };
   }
@@ -34,12 +35,14 @@ export default class PostMapper {
    * @returns {PostTypes.CreatePostDomain}
    */
   static createPostDtoToDomain(createPostDto: PostTypes.CreatePostDto): PostTypes.CreatePostDomain {
-    if (!createPostDto.url || !createPostDto.source) throw new Error('url and source are required');
+    if (!createPostDto.url || !createPostDto.source || !createPostDto.privacy)
+      throw new Error('url, source, and privacy are required');
 
     return {
       userId: createPostDto.userId,
       url: createPostDto.url,
       source: createPostDto.source,
+      privacy: createPostDto.privacy,
     };
   }
 
@@ -54,6 +57,7 @@ export default class PostMapper {
       userId: postResponseDomain.userId,
       url: postResponseDomain.url,
       source: postResponseDomain.source,
+      privacy: postResponseDomain.privacy,
       createdAt: postResponseDomain.createdAt,
     };
   }

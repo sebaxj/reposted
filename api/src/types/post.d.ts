@@ -6,16 +6,13 @@ namespace PostTypes {
     userId: string;
     url?: string | null;
     source?: 'twitter' | 'instagram' | null;
+    privacy?: 'public' | 'private';
   }
 
   /**
    * CreatePostDomain
    */
-  interface CreatePostDomain {
-    userId: string;
-    url: string;
-    source: 'twitter' | 'instagram';
-  }
+  interface CreatePostDomain extends CreatePostDto {}
 
   /**
    * PostResponseDomain
@@ -25,6 +22,7 @@ namespace PostTypes {
     userId: string;
     url: string;
     source: 'twitter' | 'instagram';
+    privacy: 'public' | 'private';
     createdAt: Date;
   }
 

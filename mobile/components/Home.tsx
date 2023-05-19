@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { toggleFeedView } from '../redux/feedSlice';
 import InstagramEmbed from './InstagramEmbed';
 import TiktokEmbed from './TikTokEmbed';
+import { StackScreenProps } from '@react-navigation/stack';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(8),
   },
   activeText: {
-    color: '#B6465F',
+    color: '#EC555E',
     fontSize: 16,
   },
 
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: moderateScale(2),
-    borderBottomColor: '#B6465F',
+    borderBottomColor: '#EC555E',
     paddingBottom: verticalScale(3),
   },
   inactiveButton: {
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: scaleFont(15),
-    color: '#B6465F',
+    color: '#EC555E',
   },
   post: {
     backgroundColor: '#FFFFFF',
@@ -70,6 +71,30 @@ const styles = StyleSheet.create({
     width: horizontalScale(50),
     height: horizontalScale(50),
     borderRadius: horizontalScale(25),
+  },
+  postButtonContainer: {
+    position: 'absolute',
+    bottom: horizontalScale(16),
+    right: verticalScale(16),
+  },
+  postButton: {
+    backgroundColor: '#EC555E',
+    height: horizontalScale(64),
+    width: horizontalScale(64),
+    borderRadius: horizontalScale(32),
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000000',
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 1,
+    },
+  },
+  postButtonText: {
+    fontSize: scaleFont(40),
+    color: '#FFFFFF',
   },
 });
 
@@ -199,12 +224,16 @@ function Following(): JSX.Element {
   );
 }
 
-export default function Home(): JSX.Element {
+type HomeProps = StackScreenProps<NavigationTypes.HomeStackParamList, 'Home'>;
+
+export default function Home(props: HomeProps): JSX.Element {
   // get feed view and instagram token from redux store
   const globalFeedView: boolean = useAppSelector((state) => state.feed.global);
 
   // get dispatcher
   const dispatch = useAppDispatch();
+
+  const { navigation } = props;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -223,6 +252,14 @@ export default function Home(): JSX.Element {
         </TouchableOpacity>
       </View>
       {globalFeedView ? <Global /> : <Following />}
+      <View style={styles.postButtonContainer}>
+        <TouchableOpacity
+          style={styles.postButton}
+          onPress={() => navigation.navigate('CreatePost')}
+        >
+          <Text style={styles.postButtonText}>+</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }

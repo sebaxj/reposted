@@ -90,7 +90,7 @@ export default function Authentication(): JSX.Element {
     <SafeAreaView style={styles.container}>
       <Image source={require('../assets/reposted.png')} style={styles.logo} />
       <Text style={styles.title}>Reposted</Text>
-      {error && <Text>{`Error: ${error.toString()}`}</Text>}
+      {error && <Text>{`Error: ${error.error ?? error.data}`}</Text>}
       <AppleButton
         buttonStyle={AppleButton.Style.BLACK}
         buttonType={AppleButton.Type.SIGN_IN}
