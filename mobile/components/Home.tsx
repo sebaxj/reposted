@@ -2,6 +2,7 @@ import React from 'react';
 import {
   FlatList,
   Image,
+  RefreshControl,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -15,6 +16,7 @@ import { toggleFeedView } from '../redux/feedSlice';
 import InstagramEmbed from './InstagramEmbed';
 import TiktokEmbed from './TikTokEmbed';
 import { StackScreenProps } from '@react-navigation/stack';
+import { useGetUserQuery } from '../redux/api';
 
 const styles = StyleSheet.create({
   container: {
@@ -140,6 +142,12 @@ function Post({
 }
 
 function Global(): JSX.Element {
+  // TODO: clean up
+  // get dispatcher
+  const jwt: JWT | undefined = useAppSelector((state) => state.authentication.jwt);
+  const { isLoading, isFetching, refetch } = useGetUserQuery(jwt?._id as string);
+  // if isLoading || isFetching, render Loading component
+
   const data: {
     url: string;
     postedBy: string;
@@ -178,6 +186,7 @@ function Global(): JSX.Element {
       data={data}
       keyExtractor={(item) => item.key}
       renderItem={({ item }) => <Post item={item} />}
+      refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
     />
   );
 }
