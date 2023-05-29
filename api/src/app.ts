@@ -13,6 +13,7 @@ import { MONGO_CONN_TIMEOUT } from './utils/constants';
 import indexRoutes from './routes/index.routes';
 import userRoutes from './routes/user.routes';
 import postRoutes from './routes/post.routes';
+import setCache from './middleware/cache.middleware';
 
 dotenv.config();
 
@@ -49,6 +50,9 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+
+// set cache control header
+app.use(setCache);
 
 // send fetch requests to the router
 app.use('/', indexRoutes);
