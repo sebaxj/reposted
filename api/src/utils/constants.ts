@@ -17,6 +17,13 @@ export const MAX_TOKEN_AGE = 3 * 60 * 60;
 export const MAX_COOKIE_AGE = 3 * 60 * 60 * 1000;
 
 /**
+ * Cache control header
+ * Age is 5 minutes
+ * @type {number}
+ */
+export const CACHE_PERIOD = 5 * 60;
+
+/**
  * HTTP status codes
  */
 export enum HttpStatus {

@@ -16,10 +16,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    # for production
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
     restart: unless-stopped
     env_file: ./.env
     ports:

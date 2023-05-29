@@ -57,6 +57,12 @@ export const api = createApi({
         body: { ...postBody },
       }),
     }),
+    getUser: builder.query<ApiResponse, string>({
+      query: (userId) => ({
+        url: `/user/${userId}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -92,6 +98,6 @@ export const tiktokApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useCreatePostMutation } = api;
+export const { useLoginMutation, useCreatePostMutation, useGetUserQuery } = api;
 export const { useGetInstagramPostEmbedCodeQuery } = instagramApi;
 export const { useGetTiktokPostEmbedCodeQuery } = tiktokApi;
