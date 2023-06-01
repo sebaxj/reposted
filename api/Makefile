@@ -1,5 +1,6 @@
 # Always consider the 'build' target out of date to force a build
 .PHONY: build
+.PHONY: dev
 
 # Docker Image name
 IMAGE_NAME = $(shell pwd | xargs basename):$(shell git rev-parse --short HEAD)
@@ -12,13 +13,16 @@ LOCAL_PORT = 8080
 CONTAINER_PORT = 8080
 
 # Default target
-all: run
+all: build
 
 build:
 	docker build -t $(IMAGE_NAME) .
 
 run: build
 	docker run --restart unless-stopped -p $(LOCAL_PORT):$(CONTAINER_PORT) --name $(CONTAINER_NAME) $(IMAGE_NAME)
+
+dev:
+	docker-compose up
 
 clean:
 	docker rm /$(CONTAINER_NAME) && docker rmi $(IMAGE_NAME)
