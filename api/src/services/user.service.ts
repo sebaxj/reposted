@@ -41,6 +41,9 @@ export default class UserService {
             .authenticateUser(UserMapper.userRequestDtoToDomain({ email: decodedIdToken.email, firstName, lastName }))
             .then((user: UserTypes.UserResponseDomain & { created: boolean }) => {
               return resolve(user);
+            })
+            .catch((err: unknown) => {
+              return reject(err);
             });
         })
         .catch((err: unknown) => {

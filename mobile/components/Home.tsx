@@ -9,14 +9,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import TwitterPreview from 'react-native-twitter-preview';
+import { StackScreenProps } from '@react-navigation/stack';
 import { horizontalScale, moderateScale, scaleFont, verticalScale } from '../utils/scale.utility';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { toggleFeedView } from '../redux/feedSlice';
-import InstagramEmbed from './InstagramEmbed';
-import TiktokEmbed from './TikTokEmbed';
-import { StackScreenProps } from '@react-navigation/stack';
 import { useGetUserQuery } from '../redux/api';
+import Post from './Post';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,24 +54,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#FFFFFF',
   },
-  username: {
-    fontSize: scaleFont(15),
-    color: '#EC555E',
-  },
-  post: {
-    backgroundColor: '#FFFFFF',
-  },
-  postHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: horizontalScale(8),
-    paddingLeft: horizontalScale(8),
-  },
-  profileImage: {
-    width: horizontalScale(50),
-    height: horizontalScale(50),
-    borderRadius: horizontalScale(25),
-  },
   postButtonContainer: {
     position: 'absolute',
     bottom: horizontalScale(16),
@@ -99,47 +79,6 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
 });
-
-function Post({
-  item,
-}: {
-  item: { url: string; postedBy: string; content: 'twitter' | 'instagram' | 'tiktok'; key: string };
-}): JSX.Element {
-  if (item.content === 'instagram') {
-    return (
-      <View style={styles.post}>
-        <View style={styles.postHeader}>
-          <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profileImage} />
-          <Text style={styles.username}>@{item.postedBy}</Text>
-        </View>
-        <InstagramEmbed url={item.url} />
-      </View>
-    );
-  }
-  if (item.content === 'tiktok') {
-    return (
-      <View style={styles.post}>
-        <View style={styles.postHeader}>
-          <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profileImage} />
-          <Text style={styles.username}>@{item.postedBy}</Text>
-        </View>
-        <TiktokEmbed url={item.url} />
-      </View>
-    );
-  }
-  if (item.content === 'twitter') {
-    return (
-      <View style={styles.post}>
-        <View style={styles.postHeader}>
-          <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profileImage} />
-          <Text style={styles.username}>@{item.postedBy}</Text>
-        </View>
-        <TwitterPreview url={item.url} />
-      </View>
-    );
-  }
-  return <Text>Invalid URL</Text>;
-}
 
 function Global(): JSX.Element {
   // TODO: clean up

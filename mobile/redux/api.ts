@@ -34,7 +34,7 @@ export const api = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<ApiResponse, LoginRequest>({
       query: (credentials) => ({
-        url: '/user/authenticate',
+        url: '/users/authenticate',
         method: 'POST',
         body: { ...credentials },
       }),
@@ -52,14 +52,14 @@ export const api = createApi({
     }),
     createPost: builder.mutation<ApiResponse, CreatePostRequest>({
       query: (postBody) => ({
-        url: '/post/create',
+        url: '/posts/create',
         method: 'POST',
         body: { ...postBody },
       }),
     }),
     getUser: builder.query<ApiResponse, string>({
       query: (userId) => ({
-        url: `/user/${userId}`,
+        url: `/users/${userId}`,
         method: 'GET',
       }),
     }),

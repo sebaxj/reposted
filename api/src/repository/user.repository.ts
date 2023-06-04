@@ -15,7 +15,12 @@ export default class UserRepository {
   ): Promise<UserTypes.UserResponseDomain & { created: boolean }> {
     return new Promise((resolve, reject) => {
       // find and upsert user
-      User.findOneAndUpdate(userRequestDomain, {}, { upsert: true, new: true, runValidators: true, rawResult: true })
+      User.findOneAndUpdate({ email: userRequestDomain.email }, userRequestDomain, {
+        upsert: true,
+        new: true,
+        runValidators: true,
+        rawResult: true,
+      })
         .then(
           (
             user: ModifyResult<

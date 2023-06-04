@@ -28,3 +28,17 @@ export const createPost = async (req: Request, res: Response) => {
     return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(response(null, `${err}`, null));
   }
 };
+
+//--------
+// Get Posts by filter
+//--------
+export const getPosts = async (req: Request, res: Response) => {
+  try {
+    // return OK response
+    return res.status(HttpStatus.OK).json(response({ query: req.query }, null, null));
+  } catch (err: unknown) {
+    // log error
+    Logger.error(createLog("Can't get posts", `${err}`, 'post.controller'));
+    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(response(null, `${err}`, null));
+  }
+};

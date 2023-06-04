@@ -11,5 +11,10 @@ const router = Router();
 //--------
 router.post('/create', JwtService.verifyJWT, postController.createPost);
 
+//--------
+// Get Posts by filter
+//--------
+router.get('/', JwtService.verifyJWT, postController.getPosts);
+
 // export to make importable by 'app.ts'
 export default router;
