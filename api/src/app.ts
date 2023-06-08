@@ -56,8 +56,8 @@ app.use(setCache);
 
 // send fetch requests to the router
 app.use('/', indexRoutes);
-app.use('/user', userRoutes);
-app.use('/post', postRoutes);
+app.use('/users', userRoutes);
+app.use('/posts', postRoutes);
 
 // create mongoose connection to MongoDB
 Logger.info(

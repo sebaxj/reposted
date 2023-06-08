@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import TwitterPreview from 'react-native-twitter-preview';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import { horizontalScale, moderateScale, scaleFont, verticalScale } from '../utils/scale.utility';
 import InstagramEmbed from './InstagramEmbed';
 import TiktokEmbed from './TikTokEmbed';
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: horizontalScale(16),
     width: '100%',
-    marginBottom: verticalScale(80),
+    marginTop: verticalScale(16),
   },
   privacyText: {
     fontSize: scaleFont(17),
@@ -179,45 +180,51 @@ export default function CreatePost(props: CreatePostProps): JSX.Element {
             onSelect={() => setSourceType('tiktok')}
           />
         </View>
+        <View>
+          <View style={styles.privacyContainer}>
+            <Text style={styles.postLinkTitle}>Privacy:</Text>
+            <TouchableOpacity
+              style={{
+                ...styles.privacyButton,
+                borderBottomColor: privacy === 'public' ? '#EC555E' : '#AAAABB',
+              }}
+              onPress={() => setPrivacy('public')}
+            >
+              <Text
+                style={{
+                  ...styles.postLinkTitle,
+                  color: privacy === 'public' ? '#EC555E' : '#AAAABB',
+                }}
+              >
+                MungerHouse
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                ...styles.privacyButton,
+                borderBottomColor: privacy === 'private' ? '#EC555E' : '#AAAABB',
+              }}
+              onPress={() => setPrivacy('private')}
+            >
+              <Text
+                style={{
+                  ...styles.privacyText,
+                  color: privacy === 'private' ? '#EC555E' : '#AAAABB',
+                }}
+              >
+                GymMemez
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center', marginTop: 8 }}>
+            <AntDesign name="pluscircleo" size={24} color="#AAAABB" />
+            <Text style={{ color: '#AAAABB', fontSize: 15 }}>Create new group</Text>
+          </View>
+        </View>
         <View style={styles.preview}>
           {sourceType === 'twitter' && postLink && <TwitterPreview url={postLink} />}
           {sourceType === 'instagram' && postLink && <InstagramEmbed url={postLink} />}
           {sourceType === 'tiktok' && postLink && <TiktokEmbed url={postLink} />}
-        </View>
-        <View style={styles.privacyContainer}>
-          <Text style={styles.postLinkTitle}>Privacy:</Text>
-          <TouchableOpacity
-            style={{
-              ...styles.privacyButton,
-              borderBottomColor: privacy === 'public' ? '#EC555E' : '#AAAABB',
-            }}
-            onPress={() => setPrivacy('public')}
-          >
-            <Text
-              style={{
-                ...styles.postLinkTitle,
-                color: privacy === 'public' ? '#EC555E' : '#AAAABB',
-              }}
-            >
-              Public
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              ...styles.privacyButton,
-              borderBottomColor: privacy === 'private' ? '#EC555E' : '#AAAABB',
-            }}
-            onPress={() => setPrivacy('private')}
-          >
-            <Text
-              style={{
-                ...styles.privacyText,
-                color: privacy === 'private' ? '#EC555E' : '#AAAABB',
-              }}
-            >
-              Private
-            </Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
       <View style={styles.postButtonContainer}>

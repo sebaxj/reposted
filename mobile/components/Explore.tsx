@@ -51,10 +51,54 @@ const styles = StyleSheet.create({
 });
 
 const profiles = [
-  { id: '1', handle: '@user1', fullName: 'User One', image: 'https://via.placeholder.com/50' },
-  { id: '2', handle: '@user2', fullName: 'User Two', image: 'https://via.placeholder.com/50' },
-  { id: '3', handle: '@user3', fullName: 'User Three', image: 'https://via.placeholder.com/50' },
-  { id: '4', handle: '@user4', fullName: 'User Four', image: 'https://via.placeholder.com/50' },
+  {
+    id: '1',
+    handle: '@chogan',
+    fullName: 'Connor Hogan',
+    image: 'https://via.placeholder.com/50',
+  },
+  {
+    id: '2',
+    handle: '@dylanly',
+    fullName: 'Dylan Ly',
+    image: 'https://via.placeholder.com/50',
+  },
+  {
+    id: '3',
+    handle: '@wylie',
+    fullName: 'Wylie Kaplan',
+    image: 'https://via.placeholder.com/50',
+  },
+  {
+    id: '4',
+    handle: '@tarpar',
+    fullName: 'Tara Parekh',
+    image: 'https://via.placeholder.com/50',
+  },
+  {
+    id: '5',
+    handle: '@peyton',
+    fullName: 'Peyton Hulsey',
+    image: 'https://via.placeholder.com/50',
+  },
+  {
+    id: '6',
+    handle: '@sammyk',
+    fullName: 'Sam Kirchner',
+    image: 'https://via.placeholder.com/50',
+  },
+  {
+    id: '7',
+    handle: '@saurenk',
+    fullName: 'Sauren Khosla',
+    image: 'https://via.placeholder.com/50',
+  },
+  {
+    id: '8',
+    handle: '@corbino',
+    fullName: 'Corbin Schmeil',
+    image: 'https://via.placeholder.com/50',
+  },
 ];
 
 const renderItem = ({ item }) => (

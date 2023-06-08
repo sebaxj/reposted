@@ -53,40 +53,40 @@ export default function Profile(): JSX.Element {
   // import hooks for authentication reducer
   const dispatch = useAppDispatch();
   const twitterData = [
-    { url: "https://twitter.com/Tesla/status/1655673425736638473", key: '1' },
-    { url: "https://twitter.com/RoyalFamily/status/1655603604957306882?s=20", key: '2' },
-    { url: "https://twitter.com/megynkelly/status/1655329512912044032?s=20", key: '3' },
-    { url: "https://twitter.com/megynkelly/status/1655329512912044032?s=20", key: '4' },
-  ];  
+    { url: 'https://twitter.com/Tesla/status/1655673425736638473', key: '1' },
+    { url: 'https://twitter.com/RoyalFamily/status/1655603604957306882?s=20', key: '2' },
+    { url: 'https://twitter.com/megynkelly/status/1655329512912044032?s=20', key: '3' },
+    { url: 'https://twitter.com/megynkelly/status/1655329512912044032?s=20', key: '4' },
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-      ListHeaderComponent={(<>
-          <Image
-          style={styles.headerImage}
-          source={{ uri: 'https://via.placeholder.com/500' }}
-        />
-        <Image
-          style={styles.profileImage}
-          source={{ uri: 'https://via.placeholder.com/100' }}
-        />
-        <View style={styles.userInfo}>
-          <Text style={styles.handle}>@user0</Text>
-          <Text style={styles.fullName}>User Zero</Text>
-          <Text style={styles.bio}>Reposting some fun stuff</Text>
-          <Text style={styles.followerCount}>123 followers</Text>
-        </View>
-        </>
-      )}
+        ListHeaderComponent={
+          <>
+            <Image
+              style={styles.headerImage}
+              source={{
+                uri: 'https://via.placeholder.com/50',
+              }}
+            />
+            <Image
+              style={styles.profileImage}
+              source={{
+                uri: 'https://via.placeholder.com/50',
+              }}
+            />
+            <View style={styles.userInfo}>
+              <Text style={styles.handle}>@sebastian</Text>
+              <Text style={styles.fullName}>Sebastian James</Text>
+              <Text style={styles.bio}>Fearless leader of Reposted Inc.</Text>
+              <Text style={styles.followerCount}>2 Groups</Text>
+            </View>
+          </>
+        }
         style={{ width: '100%' }}
         data={twitterData}
-        renderItem={({ item }) => (
-          <TwitterPreview
-            url={item.url}
-            backgroundColor="#F8F8FF"
-          />
-        )}
+        renderItem={({ item }) => <TwitterPreview url={item.url} backgroundColor="#F8F8FF" />}
       />
     </SafeAreaView>
   );
