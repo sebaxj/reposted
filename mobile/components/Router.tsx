@@ -8,5 +8,5 @@ export default function Router(): JSX.Element {
   // get authentication state from redux store
   const isLoggedIn: JWT | undefined = useAppSelector((state) => state.authentication.jwt);
 
-  return <NavigationContainer>{isLoggedIn ? <AppStack /> : <LoginStack />}</NavigationContainer>;
+  return <NavigationContainer>{!isLoggedIn ? <AppStack /> : <LoginStack />}</NavigationContainer>;
 }

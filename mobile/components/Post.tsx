@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   },
   post: {
     backgroundColor: '#FFFFFF',
+    marginVertical: horizontalScale(8),
   },
   postHeader: {
     flexDirection: 'row',
@@ -23,6 +24,14 @@ const styles = StyleSheet.create({
     width: horizontalScale(50),
     height: horizontalScale(50),
     borderRadius: horizontalScale(25),
+  },
+  comments: {
+    marginHorizontal: horizontalScale(10),
+    gap: horizontalScale(4),
+  },
+  commentLine: {
+    flexDirection: 'row',
+    gap: horizontalScale(6),
   },
 });
 
@@ -37,10 +46,27 @@ export default function Post(props: PostProps): JSX.Element {
     return (
       <View style={styles.post}>
         <View style={styles.postHeader}>
-          <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profileImage} />
+          <Image
+            source={{
+              uri: 'https://via.placeholder.com/50',
+            }}
+            style={styles.profileImage}
+          />
           <Text style={styles.username}>@{item.postedBy}</Text>
         </View>
         <InstagramEmbed url={item.url} />
+        <View style={styles.comments}>
+          <View style={styles.commentLine}>
+            <Text style={{ fontWeight: 'bold', fontSize: scaleFont(15) }}>peyton</Text>
+            <Text style={{ fontSize: scaleFont(15) }}>
+              I love this! I'm going to try it out this weekend.
+            </Text>
+          </View>
+          <View style={styles.commentLine}>
+            <Text style={{ fontWeight: 'bold', fontSize: scaleFont(15) }}>sammyk</Text>
+            <Text style={{ fontSize: scaleFont(15) }}>lol damn thats the truth</Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -48,7 +74,12 @@ export default function Post(props: PostProps): JSX.Element {
     return (
       <View style={styles.post}>
         <View style={styles.postHeader}>
-          <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profileImage} />
+          <Image
+            source={{
+              uri: 'https://via.placeholder.com/50',
+            }}
+            style={styles.profileImage}
+          />
           <Text style={styles.username}>@{item.postedBy}</Text>
         </View>
         <TiktokEmbed url={item.url} />
@@ -59,10 +90,41 @@ export default function Post(props: PostProps): JSX.Element {
     return (
       <View style={styles.post}>
         <View style={styles.postHeader}>
-          <Image source={{ uri: 'https://via.placeholder.com/50' }} style={styles.profileImage} />
+          <Image
+            source={{
+              uri: 'https://via.placeholder.com/50',
+            }}
+            style={styles.profileImage}
+          />
           <Text style={styles.username}>@{item.postedBy}</Text>
         </View>
         <TwitterPreview url={item.url} />
+        <View style={styles.comments}>
+          <View style={styles.commentLine}>
+            <Text style={{ fontWeight: 'bold', fontSize: scaleFont(15) }}>wylie</Text>
+            <Text style={{ fontSize: scaleFont(15) }}>
+              <Text style={{ color: 'blue' }}>@tarpar</Text> relatable?
+            </Text>
+          </View>
+          <View style={styles.commentLine}>
+            <Text style={{ fontWeight: 'bold', fontSize: scaleFont(15) }}>tarpar</Text>
+            <Text style={{ fontSize: scaleFont(15) }}>
+              <Text style={{ color: 'blue' }}>@wylie</Text> ha... ha ha... no I be crushin it
+            </Text>
+          </View>
+          <View style={styles.commentLine}>
+            <Text style={{ fontWeight: 'bold', fontSize: scaleFont(15) }}>dylanly</Text>
+            <Text style={{ fontSize: scaleFont(15) }}>guyssss we are ALL crushin in</Text>
+          </View>
+          <View style={styles.commentLine}>
+            <Text style={{ fontWeight: 'bold', fontSize: scaleFont(15) }}>chogan</Text>
+            <Text style={{ fontSize: scaleFont(15) }}>
+              <Text style={{ color: 'blue' }}>@dylanly</Text> What do you mean I saw you skip leg
+              day...
+            </Text>
+          </View>
+          <Text style={{ color: '#AAAABB', fontSize: scaleFont(15) }}>Post a Comment...</Text>
+        </View>
       </View>
     );
   }

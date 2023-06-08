@@ -95,7 +95,7 @@ function Global(): JSX.Element {
   }[] = [
     {
       url: 'https://www.instagram.com/p/CsOJmhNPsx4/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
-      postedBy: 'user1234',
+      postedBy: 'chogan',
       content: 'instagram',
       key: '1',
     },
@@ -107,7 +107,7 @@ function Global(): JSX.Element {
     },
     {
       url: 'https://www.instagram.com/p/CsTXpfXxHTJ/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
-      postedBy: 'user5678',
+      postedBy: 'wylie',
       content: 'instagram',
       key: '3',
     },
@@ -116,6 +116,18 @@ function Global(): JSX.Element {
       postedBy: 'tarpar',
       content: 'tiktok',
       key: '4',
+    },
+    {
+      url: 'https://www.instagram.com/p/CsTXpfXxHTJ/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
+      postedBy: 'peyton',
+      content: 'instagram',
+      key: '5',
+    },
+    {
+      url: 'https://www.instagram.com/p/CsTXpfXxHTJ/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
+      postedBy: 'sammyk',
+      content: 'instagram',
+      key: '6',
     },
   ];
 
@@ -138,28 +150,40 @@ function Following(): JSX.Element {
     key: string;
   }[] = [
     {
-      url: 'https://twitter.com/Tesla/status/1655673425736638473',
-      postedBy: 'saurenk',
-      content: 'twitter',
+      url: 'https://www.instagram.com/p/CtNbkqds1SU/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
+      postedBy: 'dylanly',
+      content: 'instagram',
       key: '1',
     },
     {
-      url: 'https://www.tiktok.com/@scout2015/video/6718335390845095173',
-      postedBy: 'corbino',
-      content: 'tiktok',
+      url: 'https://twitter.com/JimGaffigan/status/178986566541258752?s=20',
+      postedBy: 'chogan',
+      content: 'twitter',
       key: '2',
     },
     {
-      url: 'https://twitter.com/RoyalFamily/status/1655603604957306882?s=20',
-      postedBy: 'corbino',
-      content: 'twitter',
+      url: 'https://www.instagram.com/p/CtDEDyohlUg/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
+      postedBy: 'wylie',
+      content: 'instagram',
       key: '3',
     },
     {
       url: 'https://www.tiktok.com/@goodthing828/video/7232724820650167579',
-      postedBy: 'sebastianxj',
+      postedBy: 'tarpar',
       content: 'tiktok',
       key: '4',
+    },
+    {
+      url: 'https://www.instagram.com/p/CsTXpfXxHTJ/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
+      postedBy: 'peyton',
+      content: 'instagram',
+      key: '5',
+    },
+    {
+      url: 'https://www.instagram.com/p/CsTXpfXxHTJ/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==',
+      postedBy: 'sammyk',
+      content: 'instagram',
+      key: '6',
     },
   ];
   return (
@@ -190,13 +214,13 @@ export default function Home(props: HomeProps): JSX.Element {
           onPress={() => dispatch(toggleFeedView(true))}
           style={globalFeedView ? styles.activeButton : styles.inactiveButton}
         >
-          <Text style={globalFeedView ? styles.activeText : styles.inactiveText}>Global</Text>
+          <Text style={globalFeedView ? styles.activeText : styles.inactiveText}>MungerHouse</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => dispatch(toggleFeedView(false))}
           style={!globalFeedView ? styles.activeButton : styles.inactiveButton}
         >
-          <Text style={globalFeedView ? styles.inactiveText : styles.activeText}>Following</Text>
+          <Text style={globalFeedView ? styles.inactiveText : styles.activeText}>GymMemez</Text>
         </TouchableOpacity>
       </View>
       {globalFeedView ? <Global /> : <Following />}
